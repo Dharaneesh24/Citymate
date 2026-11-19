@@ -1,46 +1,70 @@
 # CityMate Grenoble
 
-Source for CityMate’s visitor app. Private place data and generated build output are intentionally not included in this public repository.
+CityMate is a mobile-first guide for students and other newcomers settling into Grenoble, France. It brings everyday essentials such as grocery stores, pharmacies, and student services into one searchable map. The guide covers **120 curated places across nine categories**.
+
+Dharaneesh Venkatasalamoorthy built CityMate after arriving in Grenoble as an international student and finding that practical information was spread across group chats, maps, and separate websites.
+
+[Explore the live app](https://citymate-grenoble.base44.app/)
+
+## Features
+
+- **Map and list views.** Search for places, combine category filters, and sort by distance or rating.
+- **First 48h checklist.** Find useful places for your first days in Grenoble and check them off as you go.
+- **Near Me.** Use your location to find nearby places. When location is unavailable, distances are estimated from the Grenoble Ecole de Management campus.
+- **Place details.** See addresses and directions, with opening hours and contact details where available.
+- **Feedback.** Suggest a place, report a correction, or share an idea through the live app.
+
+## First-week launch metrics
+
+CityMate was launched through Grenoble student communities. The live app recorded the following traffic in its first seven days.
+
+| Metric | First seven days |
+| --- | ---: |
+| Unique visitors | 266 |
+| Total visits | 436 |
 
 ## Run locally
 
-Before running or building the app, obtain the private data modules and place them at `src/lib/placesData.js` and `src/lib/placesRichData.js`. These files are excluded from Git, and the app cannot build without them.
+**Requirements:** Node.js 22.12 or newer, npm, and access to the private place data modules. The public repository excludes the dataset and generated build output.
 
-With Node.js 22.12 or newer installed, run:
+1. Clone the repository.
+
+   ```sh
+   git clone https://github.com/Dharaneesh24/Citymate.git
+   cd Citymate
+   ```
+
+2. Place the private data modules at `src/lib/placesData.js` and `src/lib/placesRichData.js`.
+3. Install dependencies and start the Vite development server.
+
+   ```sh
+   npm ci
+   npm run dev
+   ```
+
+   Open the URL printed in the terminal. To try CityMate without the private data modules, use the [live app](https://citymate-grenoble.base44.app/).
+
+To build and serve a local production copy, run:
 
 ```sh
-npm ci
-npm run dev
-```
-
-For a production build, run `npm run build`, then `node serve.mjs`. OpenStreetMap tiles and external links use the internet. Near Me uses the device’s position after you grant permission. The app falls back to distance estimates from Grenoble École de Management when location is unavailable.
-
-## Try the main flows
-
-- Search for **Apna Market** and open its details to see the address, hours, phone, and directions link.
-- Use the category chips and sort menu to change the places in the list and on the map.
-- Choose **First 48h**, check off a place, and reload to confirm that its status persists.
-- Use **Near Me** to recenter the map and sort nearby places. On a narrow screen, use the bottom bar to switch between the map, list, and search.
-- Submit a message through **Feedback**. The local app confirms the save and keeps the submission in the current browser. You can inspect it under `citymate_local_feedback_v1` in the browser’s local storage. Checklist progress is stored under `pp_completed_v2`.
-
-## Build
-
-```sh
-npm ci
 npm run build
+npm start
 ```
 
-Vite prints the development address. `npm run build` regenerates `dist/` for `node serve.mjs`.
+The production server listens at [http://127.0.0.1:4173](http://127.0.0.1:4173). OpenStreetMap tiles require internet access. Near Me requires browser location permission. Checklist progress and feedback stay in the browser for the local build, and analytics stay in the current browser session.
 
-## Source layout
+## Project structure
 
-| Path | Contents |
+The public source uses **React**, **Vite**, **Tailwind CSS**, and **Leaflet** with OpenStreetMap tiles. The live app is hosted on Base44.
+
+| Path | Purpose |
 | --- | --- |
-| `src/pages/Home.jsx` | Search, filters, sorting, location, responsive layout, and checklist state |
-| `src/components/map/` | Leaflet map, markers, cards, and detail drawer |
-| `src/lib/placesData.js` and `src/lib/placesRichData.js` | Original static place records and details |
-| `src/components/feedback/` | Feedback form and confirmation |
-| `src/api/base44Client.js` | Local feedback storage and session analytics adapter |
-| `dist/` | Production build served on the loopback address |
+| [`src/pages/Home.jsx`](src/pages/Home.jsx) | Directory layout, search, filters, sorting, and checklist state |
+| [`src/components/map/`](src/components/map/) | Map, markers, navigation, and place details |
+| [`src/components/feedback/`](src/components/feedback/) | Feedback form |
+| [`src/api/base44Client.js`](src/api/base44Client.js) | Browser-local feedback and session analytics |
+| [`serve.mjs`](serve.mjs) | Local production server |
 
-Base44’s app editor, hosted authentication, dashboard, and central analytics are platform services. This local build opens directly as a visitor. Feedback and checklist progress are scoped to the local browser profile and origin, and analytics stay in the current browser tab’s session storage.
+## Maintainer
+
+[Dharaneesh Venkatasalamoorthy](https://github.com/Dharaneesh24)
