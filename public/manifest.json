@@ -1,0 +1,13 @@
+{
+  "name": "CityMate Grenoble",
+  "short_name": "CityMate",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f7f7",
+  "theme_color": "#00473d",
+  "icons": [
+    { "src": "/citymate-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/citymate-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
