@@ -6,6 +6,10 @@ Dharaneesh Venkatasalamoorthy built CityMate after arriving in Grenoble as an in
 
 [Explore the live app](https://citymate-grenoble.base44.app/)
 
+![CityMate desktop view showing the Grenoble map, category filters, and place list](docs/citymate-desktop.jpg)
+
+Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).
+
 ## Features
 
 - **Map and list views.** Search for places, combine category filters, and sort by distance or rating.
